@@ -22,6 +22,9 @@
 			    enable: true,
 			  },
 			});
+			OneSignal.getUserId(function(id){
+				console.log('user id', id)
+			});
 		});
 	</script>
 </head>
