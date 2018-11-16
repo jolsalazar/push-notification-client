@@ -14,18 +14,39 @@
 	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 	<script>
 		var OneSignal = window.OneSignal || [];
-			OneSignal.push(function() {
-			OneSignal.init({
-			  appId: "d8fbf216-bc09-42c4-a4ba-7bffb4129984",
-			  autoRegister: false,
-			  notifyButton: {
-			    enable: true,
-			  },
-			});
-			OneSignal.getUserId(function(id){
-				console.log('user id', id)
-			});
-		});
+
+		OneSignal.push(function() {
+		  OneSignal.on('subscriptionChange', function (isSubscribed) {
+		    console.log("The user's subscription state is now:",isSubscribed);
+		      OneSignal.push(function() {
+		        OneSignal.getUserId(function(userId) {
+		          console.log("OneSignal User ID:", userId);
+		        });
+		      });
+		    });
+		  });
+
+		  OneSignal.push(["init", {
+		    appId: "d8fbf216-bc09-42c4-a4ba-7bffb4129984",
+		    autoRegister: false,
+		    promptOptions: {
+		        /* My prompt options */
+		    },
+		    welcomeNotification: {
+		        //my options
+		    },
+		    notifyButton: {
+		      enable: true,
+		      showCredit: false,
+		      prenotify: true,
+		      position: 'bottom-left',
+		      text: {
+		        /*My text options */
+		     },
+		     colors: { // My custom colors
+		     }
+		   }
+		}]);
 	</script>
 </head>
 <body>
